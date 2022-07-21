@@ -84,8 +84,9 @@ class TeamsController extends Controller
      * @param  \App\Models\Teams  $teams
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teams $teams)
+    public function destroy($id)
     {
         //
+        return response()->json(['message' => 'Excluido com sucesso '.$id]);
     }
 }
