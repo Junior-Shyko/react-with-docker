@@ -36,7 +36,12 @@ class TeamsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            Teams::create($request->all());
+            return response()->json(['message' => 'Turma cadastrada com sucesso'], 200);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

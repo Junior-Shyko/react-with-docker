@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1'], function () {
     Route::get('todas-turmas', 'App\Http\Controllers\TeamsController@index');
+    Route::post('criar-turmas', 'App\Http\Controllers\TeamsController@store');
 });
