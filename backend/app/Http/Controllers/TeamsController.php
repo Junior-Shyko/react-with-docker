@@ -50,9 +50,14 @@ class TeamsController extends Controller
      * @param  \App\Models\Teams  $teams
      * @return \Illuminate\Http\Response
      */
-    public function show(Teams $teams)
+    public function show($id)
     {
-        //
+        try {
+            $teams = Teams::findOrFail($id);
+            return response()->json($teams);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     /**
