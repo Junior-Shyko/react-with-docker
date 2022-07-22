@@ -7,10 +7,20 @@ export default (props) =>{
     async function deleteTurma(id){
         api.delete("/excluir-turmas/"+id)
         .then((response) => {
-            console.log(response.data)
+            Swal.fire({
+                title: 'Sucesso',
+                text: response.data.message,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
         })
         .catch((err) => {
-
+            Swal.fire({
+                title: 'Ops!',
+                text: err.data.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
         })
     }
 

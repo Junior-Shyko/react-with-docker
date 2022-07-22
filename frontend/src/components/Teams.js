@@ -1,15 +1,42 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/Api";
 import DeleteTurma from "./Teams/Delete";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export const Teams = () => {
   const [team, setTeam] = useState([]);
+  const [show, setShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const handleClose = () => setShow(false);
+
+ 
+  function ShowModal(props, team) {
+   console.log(props)
+   console.log(team)
+
+    return (
+      <Modal {...props}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading {props.id}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={setModalShow}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  } ;
 
   useEffect(() => {
     api
       .get("/todas-turmas")
       .then((response) => {
-        console.log(response.data);
         setTeam(response.data);
       })
       .catch((err) => {
@@ -53,15 +80,18 @@ export const Teams = () => {
                   className="btn btn-secondary  btn-sm"
                   style={{ margin: "10px" }}
                   title="Editar Turma"
+                  onClick={() => setModalShow(true)}
                 >
                   Editar
                 </button>
+                <ShowModal show={modalShow}  onHide={() => setModalShow(false)} />
                 <DeleteTurma id={teams.id} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      
     </div>
   );
 };

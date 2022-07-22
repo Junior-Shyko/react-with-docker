@@ -87,6 +87,12 @@ class TeamsController extends Controller
     public function destroy($id)
     {
         //
-        return response()->json(['message' => 'Excluido com sucesso '.$id]);
+        try {
+            Teams::destroy($id);
+            //$team->destroy();
+            return response()->json(['message' => 'Excluido com sucesso '], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error: '.$th->getMessage()] , 500);
+        }
     }
 }

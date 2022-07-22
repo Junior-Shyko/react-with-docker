@@ -45,7 +45,7 @@ export const Create = () => {
             <div className="col">
               <label>
                 Nome:
-                <input type="text" name="name" className="form-control"
+                <input type="text" name="name" className="form-control" 
                  onChange={(e) => setNameTeam(e.target.value)} />
               </label>
             </div>
