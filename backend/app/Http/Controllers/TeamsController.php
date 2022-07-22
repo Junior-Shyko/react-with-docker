@@ -84,8 +84,15 @@ class TeamsController extends Controller
      * @param  \App\Models\Teams  $teams
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teams $teams)
+    public function destroy($id)
     {
         //
+        try {
+            Teams::destroy($id);
+            //$team->destroy();
+            return response()->json(['message' => 'Excluido com sucesso '], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error: '.$th->getMessage()] , 500);
+        }
     }
 }
