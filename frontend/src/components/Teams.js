@@ -20,6 +20,11 @@ export const Teams = () => {
     .then(response => {
       console.log(response);
       document.getElementById("ModalParagraphEdit").innerHTML = "Nome da Turma: "+response.data.name;
+      document.getElementById("nameTeams").value = response.data.name;
+      document.getElementById("yearTeams").value = response.data.year;
+      document.getElementById("levelTeams").value = response.data.level;
+      document.getElementById("seriesTeams").value = response.data.series;
+      document.getElementById("periodTeams").value = response.data.period;
       
     })
     .catch(error => {
@@ -97,14 +102,32 @@ export const Teams = () => {
             <p id="ModalParagraphEdit"></p>
           <Col md={12}>
           <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="text" name="name" className="form-control" />           
+            <label>Nome da Turma</label>
+            <input type="text" id="nameTeams" name="name" className="form-control" />           
           </div>
           </Col>
-          <Col md={12}>
+          <Col md={6}>
           <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="text" name="name" className="form-control" />           
+            <label>Ano Vigente</label>
+            <input type="text" id="yearTeams" name="year" className="form-control" />           
+          </div>
+          </Col>
+          <Col md={6}>
+          <div className="form-group">
+            <label>Nível</label>
+            <input type="text" id="levelTeams" name="level" className="form-control" />           
+          </div>
+          </Col>
+          <Col md={6}>
+          <div className="form-group">
+            <label>Série</label>
+            <input type="text" id="seriesTeams" name="series" className="form-control" />           
+          </div>
+          </Col>
+          <Col md={6}>
+          <div className="form-group">
+            <label>Turno</label>
+            <input type="text" id="periodTeams" name="period" className="form-control" />           
           </div>
           </Col>
 
@@ -113,10 +136,10 @@ export const Teams = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Sair
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Alterar Turma
           </Button>
         </Modal.Footer>
       </Modal>
