@@ -1,41 +1,15 @@
 import React, { useEffect, useState } from "react";
-import api from "../services/Api";
+import {api} from "../services/Api";
 import DeleteTurma from "./Teams/Delete";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Edit from './Teams/Edit'
+import {Edit}  from './Teams/Edit'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route, Link
+} from "react-router-dom";
 
 export const Teams = () => {
   const [team, setTeam] = useState([]);
-  const [show, setShow] = useState(false);
-  const [edit, setEdit] = useState([]);
-  console.log('Edit1' , edit);
-  const handleClose = () => setShow(false);
-
-  const ShowModal = (id) => {
-    setShow(true);
-    var dataEdit = {};
-    console.log('Edit2' , edit);
-    api.get('editar-turma/' + id)
-    .then(response => {
-      console.log(response.data);
-      
-      document.getElementById("ModalParagraphEdit").innerHTML = "Nome da Turma: "+response.data.name;
-      // document.getElementById("nameTeams").value = response.data.name;
-      document.getElementById("yearTeams").value = response.data.year;
-      document.getElementById("levelTeams").value = response.data.level;
-      document.getElementById("seriesTeams").value = response.data.series;
-      document.getElementById("periodTeams").value = response.data.period;
-      dataEdit['name'] = response.data.name;
-      setEdit( response.data );     
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  };
 
   useEffect(() => {
     api
@@ -50,6 +24,9 @@ export const Teams = () => {
 
   return (
     <div className="header">
+      <h1 className="text-muted" style={{ textAlign: "center" }}>
+        Todas as turmas
+      </h1>
       <table className="table table-bordered table-striped ">
         <thead className="thead-dark">
           <tr>
@@ -74,21 +51,20 @@ export const Teams = () => {
               <td>
                 <button
                   type="button"
-                  className="btn btn-secondary  btn-sm"
+                  className="btn btn-light  btn-sm"
                   style={{ margin: "10px" }}
                 >
                   Add Usuario
                 </button>
-                
-                <button
-                  type="button"
-                  className="btn btn-secondary  btn-sm"
-                  style={{ margin: "10px" }}
-                  title="Editar Turma"
-                  onClick={() => ShowModal(teams.id)}
-                >
-                  Editar {teams.id}
-                </button>
+                  <button className="btn btn-light btn-sm">
+                  <Link to={'/editar-turma/'+teams.id}>Editar</Link>
+                  </button>
+                  <Router>
+                  <Switch>
+                    <Route path="/:id" children={<Edit id={teams.id} />} />
+                  </Switch>
+                  </Router>
+
               
                 {/* <ShowModal show={modalShow} id={teams.id} onHide={() => setModalShow(false)} /> */}
                 <DeleteTurma id={teams.id} />
@@ -97,54 +73,7 @@ export const Teams = () => {
           ))}
         </tbody>
       </table>
-      <Modal show={show} id="myModal"  onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title> Alterar Turma </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <Container>
-          <Row>
-            <p id="ModalParagraphEdit"></p>
-          <Col md={12}>
-          <Edit editteam={edit}/>
-          </Col>
-          <Col md={6}>
-          <div className="form-group">
-            <label>Ano Vigente</label>
-            <input type="text" id="yearTeams" name="year" className="form-control" />           
-          </div>
-          </Col>
-          <Col md={6}>
-          <div className="form-group">
-            <label>Nível</label>
-            <input type="text" id="levelTeams" name="level" className="form-control" />           
-          </div>
-          </Col>
-          <Col md={6}>
-          <div className="form-group">
-            <label>Série</label>
-            <input type="text" id="seriesTeams" name="series" className="form-control" />           
-          </div>
-          </Col>
-          <Col md={6}>
-          <div className="form-group">
-            <label>Turno</label>
-            <input type="text" id="periodTeams" name="period" className="form-control" />           
-          </div>
-          </Col>
-
-          </Row>
-        </Container>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Sair
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Alterar Turma
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      
     </div>
   );
 };
