@@ -23,4 +23,5 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('criar-turmas', 'App\Http\Controllers\TeamsController@store');
     Route::delete('excluir-turmas/{id}', 'App\Http\Controllers\TeamsController@destroy');
     Route::get('editar-turma/{id}', 'App\Http\Controllers\TeamsController@show');
+    Route::patch('alterar-turma', 'App\Http\Controllers\TeamsController@update');
 });

@@ -78,9 +78,9 @@ class TeamsController extends Controller
      * @param  \App\Models\Teams  $teams
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teams $teams)
+    public function update(Request $request)
     {
-        //
+        return response()->json($request->all());
     }
 
     /**
