@@ -6,26 +6,31 @@ import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Edit from './Teams/Edit'
 
 export const Teams = () => {
   const [team, setTeam] = useState([]);
   const [show, setShow] = useState(false);
-
+  const [edit, setEdit] = useState([]);
+  console.log('Edit1' , edit);
   const handleClose = () => setShow(false);
 
   const ShowModal = (id) => {
     setShow(true);
+    var dataEdit = {};
+    console.log('Edit2' , edit);
     api.get('editar-turma/' + id)
     .then(response => {
-      console.log(response);
+      console.log(response.data);
+      
       document.getElementById("ModalParagraphEdit").innerHTML = "Nome da Turma: "+response.data.name;
-      document.getElementById("nameTeams").value = response.data.name;
+      // document.getElementById("nameTeams").value = response.data.name;
       document.getElementById("yearTeams").value = response.data.year;
       document.getElementById("levelTeams").value = response.data.level;
       document.getElementById("seriesTeams").value = response.data.series;
       document.getElementById("periodTeams").value = response.data.period;
-      
+      dataEdit['name'] = response.data.name;
+      setEdit( response.data );     
     })
     .catch(error => {
       console.log(error);
@@ -101,10 +106,7 @@ export const Teams = () => {
           <Row>
             <p id="ModalParagraphEdit"></p>
           <Col md={12}>
-          <div className="form-group">
-            <label>Nome da Turma</label>
-            <input type="text" id="nameTeams" name="name" className="form-control" />           
-          </div>
+          <Edit editteam={edit}/>
           </Col>
           <Col md={6}>
           <div className="form-group">
