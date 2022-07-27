@@ -12,15 +12,21 @@ export const Teams = () => {
   const [team, setTeam] = useState([]);
 
   useEffect(() => {
-    api
-      .get("/todas-turmas")
-      .then((response) => {
-        setTeam(response.data);
-      })
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
+    getTurmas();
   }, []);
+
+  const getTurmas = async () => {
+    api
+    .get("/todas-turmas")
+    .then((response) => {
+      setTeam(response.data);
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+    });
+  }
+
+  
 
   return (
     <div className="header">
@@ -54,16 +60,12 @@ export const Teams = () => {
                   className="btn btn-light  btn-sm"
                   style={{ margin: "10px" }}
                 >
-                  Add Usuario
+                  <Link to={'/criar-usuario/'+teams.id+'/nome-turma/'+teams.name}>Add Usuario</Link>
                 </button>
                   <button className="btn btn-light btn-sm">
                   <Link to={'/editar-turma/'+teams.id}>Editar</Link>
                   </button>
-                  <Router>
-                  <Switch>
-                    <Route path="/:id" children={<Edit id={teams.id} />} />
-                  </Switch>
-                  </Router>
+                  
 
               
                 {/* <ShowModal show={modalShow} id={teams.id} onHide={() => setModalShow(false)} /> */}
