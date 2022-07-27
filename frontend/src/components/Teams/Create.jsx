@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {api} from "../../services/Api";
 import Swal from 'sweetalert2'
+import { Link, useParams, useRouteMatch } from "react-router-dom";
 
 export const Create = () => {
     const [nameTeam, setNameTeam] = useState('');
@@ -9,6 +10,10 @@ export const Create = () => {
     const [seriesTeam, setSeriesTeam] = useState('');
     const [periodTeam, setPeriodTeam] = useState('');
     
+    let { id } = useParams();
+    let { url } = useRouteMatch();
+  console.log({id});
+  console.log({url});
     const postData = () => {
         //console.log(firstName);
         let data = {
