@@ -29,12 +29,17 @@ export const CreateUser = () => {
               text: response.data.message,
               icon: 'success',
               confirmButtonText: 'OK'
-            })
+            });
+            cancelForm();
           })
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
           });
         
+    }
+
+    const cancelForm = () => { 
+        document.getElementById("form-create-student").reset();
     }
 
     return (
@@ -44,7 +49,7 @@ export const CreateUser = () => {
             </div>
             <div className="row">
                 <div className="container">
-                <form onSubmit={e => e.preventDefault()}> 
+                <form onSubmit={e => e.preventDefault()} id="form-create-student"> 
                     <div className="row">
                         <div className="col form-group">
                             <label  >Nome Completo</label>
@@ -95,8 +100,15 @@ export const CreateUser = () => {
                         >
                         <a href="#"
                         onClick={createStudent}
-                        className="btn btn-primary float-right">Salvar Aluno</a>
+                        className="btn btn-primary float-right">Salvar Aluno
+                        </a>
+                        <a href="/"
+                        onClick={createStudent}
+                        className="btn btn-light float-left">Voltar
+                        </a>
                         </div>
+                        
+                       
                     </div>
                 </form>
                 </div>
