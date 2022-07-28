@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { Teams } from "./components/Teams";
 import {Create} from "./components/Teams/Create"
 import {Edit} from "./components/Teams/Edit"
+import { CreateUser } from "./components/User/Create"
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +26,7 @@ function App2() {
               <Route exact path="/" component={Teams} />               
               <Route path="/editar-turma/:id" component={Edit} />
               <Route path="/criar-usuario/:id/nome-turma/:turma" component={Create} />
+              <Route path="/criar-usuario/" component={CreateUser} />
             </Switch>
          </Router>
         </div>
