@@ -35,7 +35,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all(); 
+        try {
+            Student::create($request->all());
+                return response()->json([
+                    'message' => 'Aluno cadastrado com sucesso',
+                    'type' => 'success'
+                ], 200);
+                
+        } catch (\Exception $th) {
+            return response()->json([
+                'message' => 'Error: '.$th->getMessage(),
+                'type' => 'error'
+            ], 400);
+        }
     }
 
     /**
