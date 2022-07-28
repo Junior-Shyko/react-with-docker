@@ -34,7 +34,7 @@ export const Navbar = () => {
                 <a
                   className="nav-link dropdown-toggle"
                   id="navbarDropdown"
-                  role="button"
+                  role="button"   
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"

@@ -24,4 +24,12 @@ Route::group(['prefix' => 'v1'], function () {
     Route::delete('excluir-turmas/{id}', 'App\Http\Controllers\TeamsController@destroy');
     Route::get('editar-turma/{id}', 'App\Http\Controllers\TeamsController@show');
     Route::patch('alterar-turmas', 'App\Http\Controllers\TeamsController@update');
+
+    Route::group(['prefix' => 'aluno'], function () {
+        Route::get('todos-alunos', 'App\Http\Controllers\StudentController@index');
+        Route::post('criar-aluno', 'App\Http\Controllers\StudentController@store');
+        Route::delete('excluir-aluno', 'App\Http\Controllers\StudentController@destroy');
+        Route::get('editar-aluno/{id}', 'App\Http\Controllers\StudentController@show');
+        Route::patch('alterar-aluno', 'App\Http\Controllers\StudentController@update');
+    });
 });
