@@ -102,7 +102,7 @@ export const CreateUser = () => {
                         onClick={createStudent}
                         className="btn btn-primary float-right">Salvar Aluno
                         </a>
-                        <a href="/"
+                        <a href="listar-usuarios"
                         onClick={createStudent}
                         className="btn btn-light float-left">Voltar
                         </a>

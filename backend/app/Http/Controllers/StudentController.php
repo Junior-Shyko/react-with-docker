@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Models\FunctionGenerate;
+use Carbon\Carbon;
+use Symfony\Component\VarDumper\Cloner\Stub;
 
 class StudentController extends Controller
 {
@@ -15,7 +17,14 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        //MODIFICANDO A DATA PARA FRONT    
+        foreach ($students as $student) {
+            if(isset($student->birthday)){
+                $student->birthday = Carbon::parse($student->birthday)->format('d/m/Y');
+            }
+        }
+        return response()->json($students);
     }
 
     /**
@@ -93,8 +102,20 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($id)
     {
-        //
+        try {
+            $studenty = Student::findOrFail($id);
+            $studenty->delete();
+            return response()->json([
+                'message' => 'Aluno Excluído com sucesso',
+                'type' => 'success'
+            ], 200);
+        } catch (\Exception $th) {
+            return response()->json([
+                'message' => 'Erro: '.$th->getMessage(),
+                'type' => 'error'
+            ], 400);
+        }   
     }
 }
