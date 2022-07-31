@@ -1,10 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar } from "./components/Navbar";
+import { NavbarHeader } from "./components/NavbarHeader";
 import { Teams } from "./components/Teams";
 import {Create} from "./components/Teams/Create"
 import {Edit} from "./components/Teams/Edit"
 import { CreateUser } from "./components/User/Create"
+import { ListarAlunos } from "./components/User/ListarAlunos"
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,7 +15,7 @@ import {
 function App2() {
   return (
     <div>
-      <Navbar />
+      <NavbarHeader />
       
       <div style={{ background: "#F7F7F9" }}>
         <div
@@ -26,6 +27,7 @@ function App2() {
               <Route exact path="/" component={Teams} />               
               <Route path="/editar-turma/:id" component={Edit} />
               <Route path="/criar-usuario/:id/nome-turma/:turma" component={Create} />
+              <Route path="/listar-usuarios/" component={ListarAlunos} />
               <Route path="/criar-usuario/" component={CreateUser} />
             </Switch>
          </Router>
