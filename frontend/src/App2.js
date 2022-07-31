@@ -28,7 +28,7 @@ function App2() {
               <Route path="/editar-turma/:id" component={Edit} />
               <Route path="/criar-usuario/:id/nome-turma/:turma" component={Create} />
               <Route path="/listar-usuarios/" component={ListarAlunos} />
-              <Route path="/criar-usuario/" component={CreateUser} />
+              <Route path="/criar-aluno/" component={CreateUser} />
             </Switch>
          </Router>
         </div>
