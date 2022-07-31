@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Models\FunctionGenerate;
+use Carbon\Carbon;
 
 class StudentController extends Controller
 {
@@ -15,7 +16,14 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        //MODIFICANDO A DATA PARA FRONT    
+        foreach ($students as $student) {
+            if(isset($student->birthday)){
+                $student->birthday = Carbon::parse($student->birthday)->format('d/m/Y');
+            }
+        }
+        return response()->json($students);
     }
 
     /**
