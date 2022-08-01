@@ -32,4 +32,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('editar-aluno/{id}', 'App\Http\Controllers\StudentController@show');
         Route::patch('alterar-aluno', 'App\Http\Controllers\StudentController@update');
     });
+
+    Route::post('login', 'App\Http\Controllers\LoginJWTController@login');
 });
