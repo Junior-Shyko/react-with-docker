@@ -3,21 +3,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar } from "./components/Navbar";
 import { Teams } from "./components/Teams";
 import {Create} from "./components/Teams/Create"
+import {Edit} from "./components/Teams/Edit"
+import { CreateUser } from "./components/User/Create"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 function App2() {
   return (
     <div>
       <Navbar />
-      <h1 className="text-muted" style={{ textAlign: "center" }}>
-        Todas as turmas
-      </h1>
+      
       <div style={{ background: "#F7F7F9" }}>
         <div
           className="container"
           style={{ background: "#FFFFFF", marginTop: "0px" }}
         >
-         <Create />
-          <Teams />
+         <Router>
+            <Switch>
+              <Route exact path="/" component={Teams} />               
+              <Route path="/editar-turma/:id" component={Edit} />
+              <Route path="/criar-usuario/:id/nome-turma/:turma" component={Create} />
+              <Route path="/criar-usuario/" component={CreateUser} />
+            </Switch>
+         </Router>
         </div>
       </div>
     </div>

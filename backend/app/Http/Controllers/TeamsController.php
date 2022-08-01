@@ -78,9 +78,16 @@ class TeamsController extends Controller
      * @param  \App\Models\Teams  $teams
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teams $teams)
+    public function update(Request $request)
     {
-        //
+        try {
+            $team = Teams::findOrFail($request->id);
+            $team->update($request->all());
+            return response()->json(['message' => 'Turma alterada com sucesso']);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+        return response()->json($request->all());
     }
 
     /**

@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../../services/Api";
+import {api} from "../../services/Api";
 import Swal from 'sweetalert2'
 
 export default (props) =>{
