@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
+=======
+import React, { useEffect, useState,  useRef  } from "react";
+>>>>>>> feature/edit-student
 import { api } from "../../services/Api";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -9,10 +13,22 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Swal from "sweetalert2";
 
+<<<<<<< HEAD
 export const ListarAlunos = () => {
   const [studenty, setStudent] = useState([]);
   const [idDelete, setIdDelete] = useState([]);
   const [show, setShow] = useState(false);
+=======
+
+export const ListarAlunos = () => {
+
+  const [idDelete, setIdDelete] = useState([]);
+  const [show, setShow] = useState(false);
+  
+  const $ = require('jquery');
+  $.DataTable = require('datatables.net');
+  const tableRef = useRef();
+>>>>>>> feature/edit-student
 
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
@@ -25,16 +41,25 @@ export const ListarAlunos = () => {
     listAlunos();
   }, []);
 
-  const listAlunos = () => {
-    api
-      .get("aluno/todos-alunos")
-      .then((response) => {
-        console.log(response.data);
-        setStudent(response.data);
-      })
-      .catch((error) => {
-        console.log({ error });
-      });
+  const listAlunos = () => {    
+    const table = $(tableRef.current).DataTable(
+      {
+        ajax: 'http://localhost:5000/api/v1/aluno/todos-alunos',
+        columns: [
+            { data: 'name' , name: "Nome"},
+            {  data: 'email' , name: "Email"},
+            {  data: 'phone' , name: "Fone"},
+            {  data: 'genre' , name: "Genero."},
+            {  data: 'birthday' , name: "Data Nasc."},
+            {  data: 'action', name: 'action', orderable: false, searchable: false}
+        ],
+        destroy: true  // I think some clean up is happening here
+      }
+  )
+    // return function() {
+    //     console.log("Table destroyed")
+    //     table.destroy()
+    // }
   };
   const deleteAluno = (id) => {
     api
@@ -53,7 +78,6 @@ export const ListarAlunos = () => {
         console.log({ error });
       });
   };
-
   return (
     <Container>
       <Row className="text-center">
@@ -76,7 +100,7 @@ export const ListarAlunos = () => {
         </Col>
       </Row>
       <Row>
-        <Table striped bordered hover size="sm" responsive>
+        <Table className="display" width="100%" ref={ tableRef } striped bordered hover size="sm" responsive>
           <thead>
             <tr>
               <th>Nome</th>
@@ -88,27 +112,7 @@ export const ListarAlunos = () => {
             </tr>
           </thead>
           <tbody>
-            {studenty.map((students) => (
-              <tr key={students.id}>
-                <td>{students.name}</td>
-                <td>{students.email}</td>
-                <td>{students.phone}</td>
-                <td>{students.genre}</td>
-                <td>{students.birthday}</td>
-                <td>
-                  <Button variant="secondary" size="sm">
-                    Alterar
-                  </Button>{" "}
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => handleShow(students.id)}
-                  >
-                    Excluir
-                  </Button>{" "}
-                </td>
-              </tr>
-            ))}
+            
           </tbody>
         </Table>
       </Row>

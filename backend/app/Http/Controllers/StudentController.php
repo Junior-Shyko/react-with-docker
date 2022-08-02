@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\FunctionGenerate;
 use Carbon\Carbon;
 use Symfony\Component\VarDumper\Cloner\Stub;
-
+use Yajra\DataTables\Facades\DataTables;
+// use DataTables;
 class StudentController extends Controller
 {
     /**
@@ -17,14 +18,19 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-        //MODIFICANDO A DATA PARA FRONT    
-        foreach ($students as $student) {
-            if(isset($student->birthday)){
-                $student->birthday = Carbon::parse($student->birthday)->format('d/m/Y');
-            }
-        }
-        return response()->json($students);
+        $students = Student::select(['id','name', 'email', 'phone','genre', 'birthday'])->get();
+        return DataTables::of($students)
+        ->addColumn('action', function ($students) {
+            return '<a href="alterar-aluno/'.$students->id.'" 
+            class="btn btn-xs btn-secondary" title="Alterar dados do aluno">Alterar</a>
+            <Button variant="danger" size="sm" onClick={() => handleShow('.$students->id.')}          >
+                Excluir
+            </Button>';
+        })
+        ->editColumn('birthday', function($students) {
+            return Carbon::parse($students->birthday)->format('d/m/Y');           
+        })
+        ->make(true);
     }
 
     /**
@@ -68,9 +74,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($id)
     {
-        //
+       $students = Student::findOrFail($id);
+       $students->birthday = Carbon::parse($students->birthday)->format('d/m/Y');
+       return $students;
     }
 
     /**
@@ -91,9 +99,23 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request)
     {
-        //
+     try {
+        $birth = Carbon::parse($request->birthday)->format('Y-m-d');
+        $request['birthday'] = $birth;  
+        $student = Student::findOrFail($request->id);
+        $student->update($request->all());
+        return response()->json([
+            'message' => 'Aluno alterado com sucesso',
+            'type' => 'success'
+        ], 200);
+     } catch (\Exception $th) {
+        return response()->json([
+            'message' => 'Error: '.$th->getMessage(),
+            'type' => 'error'
+        ], 500);
+     }
     }
 
     /**
