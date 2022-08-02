@@ -30,6 +30,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('criar-aluno', 'App\Http\Controllers\StudentController@store');
         Route::delete('excluir-aluno/{id}', 'App\Http\Controllers\StudentController@destroy');
         Route::get('editar-aluno/{id}', 'App\Http\Controllers\StudentController@show');
-        Route::patch('alterar-aluno', 'App\Http\Controllers\StudentController@update');
+        Route::post('alterar-aluno', 'App\Http\Controllers\StudentController@update');
     });
 });
