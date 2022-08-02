@@ -7,9 +7,15 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import {CreateTeams} from "./Teams/CreateTeams"
 
 export const Teams = () => {
   const [team, setTeam] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     getTurmas();
@@ -28,27 +34,31 @@ export const Teams = () => {
 
   return (
     <div className="header">
-      
       <Container>
-      <Grid container spacing={2}>
-        
-        <Grid item xs={10}>
-        <h1 className="text-muted" style={{ textAlign: "center" }}>
-        Todas as turmas
-      </h1>
-        </Grid>
-        <Grid item xs={2}>
-          <Box
-            m={1}
-            display="flex"
-            justifyContent="flex-end"
-            alignItem="flex-end"
-          >
-            <Button variant="contained" title="Adicionar Turma" color="primary" style={{ height: 40 }}>
-              <AddBoxIcon /> Turma
-            </Button>
-          </Box>
-        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={10}>
+            <h1 className="text-muted" style={{ textAlign: "center" }}>
+              Todas as turmas
+            </h1>
+          </Grid>
+          <Grid item xs={2}>
+            <Box
+              m={1}
+              display="flex"
+              justifyContent="flex-end"
+              alignItem="flex-end"
+            >
+              <Button
+                variant="contained"
+                title="Adicionar Turma"
+                color="primary"
+                style={{ height: 40 }}
+                onClick={handleShow}
+              >
+                <AddBoxIcon /> Turma
+              </Button>
+            </Box>
+          </Grid>
         </Grid>
       </Container>
       <table className="table table-bordered table-striped ">
@@ -93,6 +103,14 @@ export const Teams = () => {
           ))}
         </tbody>
       </table>
+      <Modal show={show} onHide={handleClose}  animation={false} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Criar Turma</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <CreateTeams />          
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
