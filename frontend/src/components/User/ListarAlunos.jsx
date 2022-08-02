@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
-=======
-import React, { useEffect, useState,  useRef  } from "react";
->>>>>>> feature/edit-student
 import { api } from "../../services/Api";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -13,13 +9,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Swal from "sweetalert2";
 
-<<<<<<< HEAD
-export const ListarAlunos = () => {
-  const [studenty, setStudent] = useState([]);
-  const [idDelete, setIdDelete] = useState([]);
-  const [show, setShow] = useState(false);
-=======
-
 export const ListarAlunos = () => {
 
   const [idDelete, setIdDelete] = useState([]);
@@ -28,7 +17,6 @@ export const ListarAlunos = () => {
   const $ = require('jquery');
   $.DataTable = require('datatables.net');
   const tableRef = useRef();
->>>>>>> feature/edit-student
 
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
