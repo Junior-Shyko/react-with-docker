@@ -23,9 +23,9 @@ class StudentController extends Controller
         ->addColumn('action', function ($students) {
             return '<a href="alterar-aluno/'.$students->id.'" 
             class="btn btn-xs btn-secondary" title="Alterar dados do aluno">Alterar</a>
-            <Button variant="danger" size="sm" onClick={() => handleShow('.$students->id.')}          >
+            <button class="btn btn-xs btn-danger" onClick="handleShow('.$students->id.')">
                 Excluir
-            </Button>';
+            </button>';
         })
         ->editColumn('birthday', function($students) {
             return Carbon::parse($students->birthday)->format('d/m/Y');           
