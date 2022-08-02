@@ -60,7 +60,7 @@ export const Teams = () => {
                   className="btn btn-light  btn-sm"
                   style={{ margin: "10px" }}
                 >
-                  <Link to={'/criar-usuario/'+teams.id+'/nome-turma/'+teams.name}>Add Usuario</Link>
+                  <Link to={'/criar-usuario/'+teams.id+'/turma/'}>Add Usuario</Link>
                 </button>
                   <button className="btn btn-light btn-sm">
                   <Link to={'/editar-turma/'+teams.id}>Editar</Link>

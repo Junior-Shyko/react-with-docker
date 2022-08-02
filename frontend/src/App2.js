@@ -27,7 +27,7 @@ function App2() {
             <Switch>
               <Route exact path="/" component={Teams} />               
               <Route path="/editar-turma/:id" component={Edit} />
-              <Route path="/criar-usuario/:id/nome-turma/:turma" component={Create} />
+              <Route path="/criar-usuario/:id/turma" component={Create} />
               <Route path="/listar-usuarios/" component={ListarAlunos} />
               <Route path="/criar-aluno/" component={CreateUser} />
               <Route path="/alterar-aluno/:id" component={EditStudent} />
