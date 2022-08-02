@@ -7,6 +7,7 @@ import {Edit} from "./components/Teams/Edit"
 import { CreateUser } from "./components/User/Create"
 import { ListarAlunos } from "./components/User/ListarAlunos"
 import { EditStudent } from "./components/User/EditStudent"
+import  ResponsiveAppBar  from "./components/layout/ResponsiveAppBar"
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,8 +17,8 @@ import {
 function App2() {
   return (
     <div>
-      <NavbarHeader />
-      
+      {/* <NavbarHeader /> */}
+      <ResponsiveAppBar />
       <div style={{ background: "#F7F7F9" }}>
         <div
           className="container"

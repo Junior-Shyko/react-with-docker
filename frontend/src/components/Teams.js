@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {api} from "../services/Api";
 import DeleteTurma from "./Teams/Delete";
-import {Edit}  from './Teams/Edit'
+import ReactDOM from 'react-dom';
+import Button from '@mui/material/Button';
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +34,10 @@ export const Teams = () => {
       <h1 className="text-muted" style={{ textAlign: "center" }}>
         Todas as turmas
       </h1>
+      <div className="row">
+      <Button variant="contained"> Olá Mundo</Button>
+      </div>
+
       <table className="table table-bordered table-striped ">
         <thead className="thead-dark">
           <tr>
