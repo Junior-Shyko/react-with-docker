@@ -6,6 +6,7 @@ import {Create} from "./components/Teams/Create"
 import {Edit} from "./components/Teams/Edit"
 import { CreateUser } from "./components/User/Create"
 import { ListarAlunos } from "./components/User/ListarAlunos"
+import { EditStudent } from "./components/User/EditStudent"
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +30,7 @@ function App2() {
               <Route path="/criar-usuario/:id/nome-turma/:turma" component={Create} />
               <Route path="/listar-usuarios/" component={ListarAlunos} />
               <Route path="/criar-aluno/" component={CreateUser} />
+              <Route path="/alterar-aluno/:id" component={EditStudent} />
             </Switch>
          </Router>
         </div>

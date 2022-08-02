@@ -52,13 +52,13 @@ export const CreateUser = () => {
                 <form onSubmit={e => e.preventDefault()} id="form-create-student"> 
                     <div className="row">
                         <div className="col form-group">
-                            <label  >Nome Completo</label>
+                            <label>Nome Completo</label>
                             <input type="text" 
                             onChange={(e) => setName(e.target.value)}
                             className="form-control" placeholder="Ex: João da Silva" />
                         </div>
                         <div className="col form-group">
-                            <label  >E-mail</label>
+                            <label>E-mail</label>
                             <input type="text"
                             onChange={(e) => setEmail(e.target.value)}
                             className="form-control" placeholder="Ex: joao@mail.com" />
@@ -66,13 +66,13 @@ export const CreateUser = () => {
                     </div>
                     <div className="row">
                         <div className="col form-group">
-                            <label  >Telefone</label>
+                            <label>Telefone</label>
                             <input type="text" 
                             onChange={(e) => setPhone(e.target.value)}
                             className="form-control" placeholder="Ex: (99) 99999-9999" />
                         </div>
                         <div className="col form-group">
-                            <label  >Gênero</label>
+                            <label>Gênero</label>
                             <select name="" id="" 
                             onChange={(e) => setGenre(e.target.value)}
                             className="form-control" >
@@ -103,7 +103,6 @@ export const CreateUser = () => {
                         className="btn btn-primary float-right">Salvar Aluno
                         </a>
                         <a href="listar-usuarios"
-                        onClick={createStudent}
                         className="btn btn-light float-left">Voltar
                         </a>
                         </div>
