@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {api} from "../services/Api";
+import { api } from "../services/Api";
 import DeleteTurma from "./Teams/Delete";
-import ReactDOM from 'react-dom';
-import Button from '@mui/material/Button';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route, Link
-} from "react-router-dom";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export const Teams = () => {
   const [team, setTeam] = useState([]);
@@ -18,26 +17,40 @@ export const Teams = () => {
 
   const getTurmas = async () => {
     api
-    .get("/todas-turmas")
-    .then((response) => {
-      setTeam(response.data);
-    })
-    .catch((err) => {
-      console.error("ops! ocorreu um erro" + err);
-    });
-  }
-
-  
+      .get("/todas-turmas")
+      .then((response) => {
+        setTeam(response.data);
+      })
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      });
+  };
 
   return (
     <div className="header">
-      <h1 className="text-muted" style={{ textAlign: "center" }}>
+      
+      <Container>
+      <Grid container spacing={2}>
+        
+        <Grid item xs={10}>
+        <h1 className="text-muted" style={{ textAlign: "center" }}>
         Todas as turmas
       </h1>
-      <div className="row">
-      <Button variant="contained"> Olá Mundo</Button>
-      </div>
-
+        </Grid>
+        <Grid item xs={2}>
+          <Box
+            m={1}
+            display="flex"
+            justifyContent="flex-end"
+            alignItem="flex-end"
+          >
+            <Button variant="contained" title="Adicionar Turma" color="primary" style={{ height: 40 }}>
+              <AddBoxIcon /> Turma
+            </Button>
+          </Box>
+        </Grid>
+        </Grid>
+      </Container>
       <table className="table table-bordered table-striped ">
         <thead className="thead-dark">
           <tr>
@@ -65,14 +78,14 @@ export const Teams = () => {
                   className="btn btn-light  btn-sm"
                   style={{ margin: "10px" }}
                 >
-                  <Link to={'/criar-usuario/'+teams.id+'/turma/'}>Add Usuario</Link>
+                  <Link to={"/criar-usuario/" + teams.id + "/turma/"}>
+                    Add Usuario
+                  </Link>
                 </button>
-                  <button className="btn btn-light btn-sm">
-                  <Link to={'/editar-turma/'+teams.id}>Editar</Link>
-                  </button>
-                  
+                <button className="btn btn-light btn-sm">
+                  <Link to={"/editar-turma/" + teams.id}>Editar</Link>
+                </button>
 
-              
                 {/* <ShowModal show={modalShow} id={teams.id} onHide={() => setModalShow(false)} /> */}
                 <DeleteTurma id={teams.id} />
               </td>
@@ -80,7 +93,6 @@ export const Teams = () => {
           ))}
         </tbody>
       </table>
-      
     </div>
   );
 };
