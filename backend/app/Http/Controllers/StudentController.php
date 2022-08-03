@@ -23,7 +23,7 @@ class StudentController extends Controller
         ->addColumn('action', function ($students) {
             return '<a href="alterar-aluno/'.$students->id.'" 
             class="btn btn-xs btn-secondary" title="Alterar dados do aluno">Alterar</a>
-            <button class="btn btn-xs btn-danger" onClick="handleShow('.$students->id.')">
+            <button class="btn btn-xs btn-danger" onClick="excluirAluno('.$students->id.')">
                 Excluir
             </button>';
         })

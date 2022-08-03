@@ -53,6 +53,10 @@ export const EditStudent = () => {
 
     });
   }
+
+  const excluirAluno = () => {
+        console.log('sdfsdf');
+  }
   return (
     <Form onSubmit={e => e.preventDefault()} id="form-create-student">
         <Row style={{borderBottom: '1px solid #c3c3c3', margin: '5px'}}>
