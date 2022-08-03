@@ -23,5 +23,4 @@ Example project on how to develop project on Docker Compose
      docker-compose exec php-fpm php artisan migrate
 
 ### Acessar o container para npm install
- ``` docker-compose exec react-ui npm install
- ```
+    docker-compose exec react-ui npm install
