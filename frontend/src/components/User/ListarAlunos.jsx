@@ -75,7 +75,7 @@ export const ListarAlunos = () => {
         <Col md={2}>
           <div className="form-group">
             <a
-              href={"criar-aluno"}
+              href={"/criar-aluno"}
               className="btn btn-light"
               style={{ marginTop: "5px" }}
               variant="secondary"

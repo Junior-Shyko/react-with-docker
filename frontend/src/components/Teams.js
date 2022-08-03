@@ -62,7 +62,7 @@ export const Teams = () => {
         </Grid>
       </Container>
       <table className="table table-bordered table-striped ">
-        <thead className="thead-dark">
+        <thead style={{background: '#1976D2', color: 'white'}} className='text-center'>
           <tr>
             <th scope="col">Codigo</th>
             <th scope="col">Nome</th>
