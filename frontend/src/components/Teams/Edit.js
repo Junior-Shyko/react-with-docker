@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { api } from "../../services/Api";
 import Swal from "sweetalert2";
-import { Link, useParams, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 export const Edit = () => {
   const [idTeam, setIdTeam] = useState("");
@@ -12,7 +12,6 @@ export const Edit = () => {
   const [seriesTeam, setSeriesTeam] = useState("");
   const [periodTeam, setPeriodTeam] = useState("");
 
-  let { id } = useParams();
   let { url } = useRouteMatch();
 
   useEffect(() => {

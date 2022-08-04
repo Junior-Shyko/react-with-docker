@@ -1,13 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { NavbarHeader } from "./components/NavbarHeader";
 import { Teams } from "./components/Teams";
 import { CreateTeams } from "./components/Teams/CreateTeams"
 import { Edit } from "./components/Teams/Edit"
 import { CreateUser } from "./components/User/Create"
 import { ListarAlunos } from "./components/User/ListarAlunos"
 import { EditStudent } from "./components/User/EditStudent"
-import  ResponsiveAppBar  from "./components/layout/ResponsiveAppBar"
 import  Login from "./components/layout/Auth/Login"
 import {
   BrowserRouter as Router,
@@ -18,7 +16,6 @@ import {
 function App2() {
   return (
     <div>
-      {/* <NavbarHeader /> */}       
          <Router>
             <Switch>
               <Route exact path="/" component={Login} />               
@@ -30,8 +27,6 @@ function App2() {
               <Route path="/turmas" component={Teams} />
             </Switch>
          </Router>
-
-
     </div>
   );
 }

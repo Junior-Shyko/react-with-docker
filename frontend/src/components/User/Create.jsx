@@ -98,10 +98,10 @@ export const CreateUser = () => {
                                 margin: '8px'
                             }}
                         >
-                        <a href="#"
+                        <button
                         onClick={createStudent}
                         className="btn btn-primary float-right">Salvar Aluno
-                        </a>
+                        </button>
                         <a href="listar-usuarios"
                         className="btn btn-light float-left">Voltar
                         </a>
