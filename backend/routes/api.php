@@ -32,8 +32,9 @@ Route::group(['prefix' => 'v1'], function () {
             Route::delete('excluir-aluno/{id}', 'App\Http\Controllers\StudentController@destroy');
             Route::get('editar-aluno/{id}', 'App\Http\Controllers\StudentController@show');
             Route::post('alterar-aluno', 'App\Http\Controllers\StudentController@update');
+            Route::post('getUser', 'App\Http\Controllers\LoginJWTController@getUser');
         });
     });
     Route::post('login', 'App\Http\Controllers\LoginJWTController@login');
-    Route::post('me', 'App\Http\Controllers\LoginJWTController@me');
+    
 });

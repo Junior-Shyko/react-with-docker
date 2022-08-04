@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
 class LoginJWTController extends Controller
 {
     /**
@@ -68,6 +68,17 @@ class LoginJWTController extends Controller
             'token_type' => 'bearer',
             //'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    public function getUser(Request $request){
+        
+        $token = $request['token_access'];
+        $tokenParts = explode(".", $token);  
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtHeader = json_decode($tokenHeader);
+        $jwtPayload = json_decode($tokenPayload);
+        return $jwtPayload->name;
     }
 
 }

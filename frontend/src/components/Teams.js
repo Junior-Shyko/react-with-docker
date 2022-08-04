@@ -9,16 +9,18 @@ import Grid from "@mui/material/Grid";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import {CreateTeams} from "./Teams/CreateTeams"
+import  ResponsiveAppBar  from "./layout/ResponsiveAppBar"
 
 export const Teams = () => {
   const [team, setTeam] = useState([]);
   const [show, setShow] = useState(false);
-
+  const [user, setUser] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     getTurmas();
+    getUser();
   }, []);
 
   const getTurmas = async () => {
@@ -31,9 +33,30 @@ export const Teams = () => {
         console.error("ops! ocorreu um erro" + err);
       });
   };
+  //Pegando o nome do usuário autenticado
+  const getUser = async () => {
+    //Obtendo o token na sessão
+    const token = window.sessionStorage.getItem('user');
+    //Gerando objeto para enviar na requisição
+    let obj = {
+      token_access: token
+    };
+    //enviando o obj com o token no header
+    api.post('aluno/getUser', obj,{
+      headers: {
+        'Authorization': `bearer ${token}`
+      }
+    })
+    .then(resp => {
+      console.log({resp})
+      setUser(resp.data)
+    })
+    .catch()
+  }
 
-  return (
-    <div className="header">
+  return (    
+    <>
+      <ResponsiveAppBar user={user} />
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={10}>
@@ -61,6 +84,7 @@ export const Teams = () => {
           </Grid>
         </Grid>
       </Container>
+      <Container>
       <table className="table table-bordered table-striped ">
         <thead style={{background: '#1976D2', color: 'white'}} className='text-center'>
           <tr>
@@ -103,6 +127,7 @@ export const Teams = () => {
           ))}
         </tbody>
       </table>
+      </Container>
       <Modal show={show} onHide={handleClose}  animation={false} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Criar Turma</Modal.Title>
@@ -111,6 +136,6 @@ export const Teams = () => {
         <CreateTeams />          
         </Modal.Body>
       </Modal>
-    </div>
+    </>
   );
 };
