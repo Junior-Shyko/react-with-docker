@@ -126,7 +126,7 @@ const ResponsiveAppBar = (props) => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button sx={{ my: 2, color: "white", display: "block" }}>
-              <Link href="/" color="inherit" underline="none">
+              <Link href="/turmas" color="inherit" underline="none">
                 {"Turmas"}
               </Link>
             </Button>

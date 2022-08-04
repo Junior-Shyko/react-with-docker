@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import { api } from "../../services/Api";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { api, urlBase, getUserData} from "../../services/Api";
+import  ResponsiveAppBar  from "../layout/ResponsiveAppBar"
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,26 +13,35 @@ export const ListarAlunos = () => {
 
   const [idDelete, setIdDelete] = useState([]);
   const [show, setShow] = useState(false);
-  
+  const [user, setUser] = useState('');
+  //Jquery Datatables
   const $ = require('jquery');
   $.DataTable = require('datatables.net');
   const tableRef = useRef();
 
   const handleClose = () => setShow(false);
-  const handleShow = (id) => {
-    console.log({ id });
-    setIdDelete(id);
-    setShow(true);
-  };
+  
 
   useEffect(() => {
+    //Obtendo lista de alunos
     listAlunos();
+    //Obtendo o usuário
+    getUserData().then(resp => {
+        setUser(resp.data)
+    }).catch(err => {
+        console.log({err})
+    });
+
   }, []);
 
   const listAlunos = () => {    
+    const token = window.sessionStorage.getItem('user');
     const table = $(tableRef.current).DataTable(
       {
-        ajax: 'http://localhost:5000/api/v1/aluno/todos-alunos',
+        ajax: {
+          url: urlBase +'/aluno/todos-alunos',
+          headers: { 'Authorization': `bearer ${token}` },
+        },          
         columns: [
             { data: 'name' , name: "Nome"},
             {  data: 'email' , name: "Email"},
@@ -44,10 +53,7 @@ export const ListarAlunos = () => {
         destroy: true  // I think some clean up is happening here
       }
   )
-    // return function() {
-    //     console.log("Table destroyed")
-    //     table.destroy()
-    // }
+
   };
   const deleteAluno = (id) => {
     api
@@ -67,6 +73,8 @@ export const ListarAlunos = () => {
       });
   };
   return (
+    <>
+    <ResponsiveAppBar user={user} />
     <Container>
       <Row className="text-center">
         <Col md={10}>
@@ -125,5 +133,6 @@ export const ListarAlunos = () => {
         </Modal.Footer>
       </Modal>
     </Container>
+    </>
   );
 };

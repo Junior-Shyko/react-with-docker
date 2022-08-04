@@ -8,24 +8,26 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-import {CreateTeams} from "./Teams/CreateTeams"
-import  ResponsiveAppBar  from "./layout/ResponsiveAppBar"
+import { CreateTeams } from "./Teams/CreateTeams";
+import ResponsiveAppBar from "./layout/ResponsiveAppBar";
 
 export const Teams = () => {
   const [team, setTeam] = useState([]);
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     getTurmas();
     //getUser();
-    getUserData().then(resp => {
-        console.log({resp})
-    }).catch(err => {
-        console.log({err})
-    });
+    getUserData()
+      .then((resp) => {
+        setUser(resp.data)
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
   }, []);
 
   const getTurmas = async () => {
@@ -38,28 +40,8 @@ export const Teams = () => {
         console.error("ops! ocorreu um erro" + err);
       });
   };
-  //Pegando o nome do usuário autenticado
-  const getUser = async () => {
-    //Obtendo o token na sessão
-    const token = window.sessionStorage.getItem('user');
-    //Gerando objeto para enviar na requisição
-    let obj = {
-      token_access: token
-    };
-    //enviando o obj com o token no header
-    api.post('aluno/getUser', obj,{
-      headers: {
-        'Authorization': `bearer ${token}`
-      }
-    })
-    .then(resp => {
-      console.log({resp})
-      setUser(resp.data)
-    })
-    .catch()
-  }
 
-  return (    
+  return (
     <>
       <ResponsiveAppBar user={user} />
       <Container>
@@ -90,55 +72,58 @@ export const Teams = () => {
         </Grid>
       </Container>
       <Container>
-      <table className="table table-bordered table-striped ">
-        <thead style={{background: '#1976D2', color: 'white'}} className='text-center'>
-          <tr>
-            <th scope="col">Codigo</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Ano Vigênte</th>
-            <th scope="col">Nível</th>
-            <th scope="col">Série</th>
-            <th scope="col">Turno</th>
-            <th scope="col">Ação</th>
-          </tr>
-        </thead>
-        <tbody>
-          {team.map((teams) => (
-            <tr key={teams.id}>
-              <td>{teams.id}</td>
-              <td>{teams.name}</td>
-              <td>{teams.year}</td>
-              <td>{teams.level}</td>
-              <td>{teams.series}</td>
-              <td>{teams.period}</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn btn-light  btn-sm"
-                  style={{ margin: "10px" }}
-                >
-                  <Link to={"/criar-usuario/" + teams.id + "/turma/"}>
-                    Add Usuario
-                  </Link>
-                </button>
-                <button className="btn btn-light btn-sm">
-                  <Link to={"/editar-turma/" + teams.id}>Editar</Link>
-                </button>
-
-                {/* <ShowModal show={modalShow} id={teams.id} onHide={() => setModalShow(false)} /> */}
-                <DeleteTurma id={teams.id} />
-              </td>
+        <table className="table table-bordered table-striped ">
+          <thead
+            style={{ background: "#1976D2", color: "white" }}
+            className="text-center"
+          >
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Ano Vigênte</th>
+              <th scope="col">Nível</th>
+              <th scope="col">Série</th>
+              <th scope="col">Turno</th>
+              <th scope="col">Ação</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {team.map((teams) => (
+              <tr key={teams.id}>
+                <td>{teams.id}</td>
+                <td>{teams.name}</td>
+                <td>{teams.year}</td>
+                <td>{teams.level}</td>
+                <td>{teams.series}</td>
+                <td>{teams.period}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-light  btn-sm"
+                    style={{ margin: "10px" }}
+                  >
+                    <Link to={"/criar-usuario/" + teams.id + "/turma/"}>
+                      Add Usuario
+                    </Link>
+                  </button>
+                  <button className="btn btn-light btn-sm">
+                    <Link to={"/editar-turma/" + teams.id}>Editar</Link>
+                  </button>
+
+                  {/* <ShowModal show={modalShow} id={teams.id} onHide={() => setModalShow(false)} /> */}
+                  <DeleteTurma id={teams.id} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Container>
-      <Modal show={show} onHide={handleClose}  animation={false} size="lg">
+      <Modal show={show} onHide={handleClose} animation={false} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Criar Turma</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <CreateTeams />          
+          <CreateTeams />
         </Modal.Body>
       </Modal>
     </>
