@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { api } from "../services/Api";
+import { api, getUserData } from "../services/Api";
 import DeleteTurma from "./Teams/Delete";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import Button from "@mui/material/Button";
@@ -20,7 +20,12 @@ export const Teams = () => {
 
   useEffect(() => {
     getTurmas();
-    getUser();
+    //getUser();
+    getUserData().then(resp => {
+        console.log({resp})
+    }).catch(err => {
+        console.log({err})
+    });
   }, []);
 
   const getTurmas = async () => {

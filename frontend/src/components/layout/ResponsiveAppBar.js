@@ -14,7 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "@mui/material/Link";
 
-const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = (props) => {
@@ -161,7 +160,7 @@ const ResponsiveAppBar = (props) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                setting == 'Logout' ?
+                setting === 'Logout' ?
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>                 
                     <Typography textAlign="center">
                     <Link href={'/'} >{setting} </Link>
