@@ -56,8 +56,13 @@ export const ListarAlunos = () => {
 
   };
   const deleteAluno = (id) => {
+    const token = window.sessionStorage.getItem('user');
     api
-      .delete("aluno/excluir-aluno/" + id)
+      .delete("aluno/excluir-aluno/" + id, {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+      })
       .then((response) => {
         listAlunos();
         setShow(false);

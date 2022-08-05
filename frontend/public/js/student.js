@@ -1,7 +1,7 @@
 
 
 function excluirAluno(id){
-    console.log('excluir' , id)
+  var token = window.sessionStorage.getItem('user');
     // swal("Hello world!");
     swal({
       title: "Excluir Usuário",
@@ -15,6 +15,9 @@ function excluirAluno(id){
         $.ajax({
           type: "delete",
           url: "http://localhost:5000/api/v1/aluno/excluir-aluno/"+id,
+          headers: {
+            'Authorization': `bearer ${token}`
+          },
           dataType: "json",
           success: function (response) {
             console.log(response);
